@@ -1,42 +1,51 @@
 [
 	{
-		"slug": "cool-project",
-		"name": "Cool project 1",
-		"image": "placeholder.jpg",
-		"url": "https://www.google.com",
-		"date": "Jan 2014",
-		"tags": ["Angular JS","API"]
+		"slug": "coffee project",
+		"name": "coffee Program (AWT)",		
+		"url": "https://github.com/byunginK/TIL/tree/master/JDBC/coffeeProgram",
+		"date": "Jul 2020",
+		"tags": ["Java","AWT"]
 	},
 	{
-		"name": "Cool project 2",
-		"image": "placeholder.jpg",
-		"url": "#",
-		"date": "May 2014",
-		"tags": ["Python","Django"]
+		"slug": "AccountBook",
+		"name": "AccountBook",
+		"url": "https://github.com/byunginK/TIL/tree/master/JDBC/AccountBook",
+		"date": "Jul 2020",
+		"tags": ["Java","AWT"]
 	},
 	{
-		"name": "Cool project 3",
-		"image": "placeholder.jpg",
-		"url": "#",
-		"date": "June 2014",
-		"tags": ["HTML","JQuery","Django"]
+		"slug": "BlackJack",
+		"name": "BlackJack",
+		"url": "https://github.com/byunginK/TIL/tree/master/black%20jack",
+		"date": "June 2020",
+		"tags": ["Java"]
 	},
 	{
-		"name": "Cool project 4",
-		"image": "placeholder.jpg",
-		"date": "Oct 2016",
-		"tags": ["Python","nodejs"]
+		"slug": "BaseBall Player Management",
+		"name": "BaseBall Player Management",
+		"date": "June 2020",
+		"url": "https://github.com/byunginK/TIL/tree/master/BaseBall%20UI",
+		"tags": ["Java"]
 	},
 	{
-		"name": "Cool project 5",
-		"image": "placeholder.jpg",
-		"date": "Oct 2016",
-		"tags": ["Python","nodejs"]
+		"slug": "SimpleFive",
+		"name": "SimpleFive Project",
+		"url": "https://github.com/ukyung0329/SemiProject",
+		"date": "Sep 2020",
+		"tags": ["Java","JSP","Oracle"]
 	},
 	{
-		"name": "Cool project 6",
-		"image": "placeholder.jpg",
-		"date": "Oct 2016",
-		"tags": ["Python","nodejs"]
+		"slug": "PaperHouse",
+		"name": "PaperHouse Project",
+		"url": "https://github.com/drexqq/bit-final-project",
+		"date": "Oct 2020",
+		"tags": ["Spring boot","Oracle","HTML"]
+	},
+	{
+		"slug": "San",
+		"name": "San Project",
+		"url": "https://github.com/byunginK/sanproject",
+		"date": "Oct 2020",
+		"tags": ["Spring","Oracle","JSP"]
 	}
 ]

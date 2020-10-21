@@ -3,8 +3,8 @@ description: 새롭게 배운내용, 경험한 내용을 꾸준히 남기자
 author: byunginK
 github: https://github.com/byunginK
 about: Web Programmer가 되고 싶다
-disqus_shortname: 병팔's Blog
-google_analytics: ''
+disqus_shortname: stackproblems
+google_analytics: UA-XXXXXXXX-Y
 
 enableTags: true
 tagarray: []
@@ -15,14 +15,7 @@ collections:
     permalink: /project/:path/
 
 social:
-    - icon: fa-facebook
-      link: "#"
-    - icon: fa-twitter
-      link: "#"
-    - icon: fa-linkedin
-      link: "#"
-    - icon: fa-stack-exchange
-      link: "#"
+   
     - icon: fa-github
       link: "https://github.com/byunginK"
 
@@ -35,8 +28,7 @@ urls:
       url: /about/
     - text: My Projects
       url: /projects/
-    - text: XML Feed
-      url: /feed.xml
+
 
 url: "https://byunginK.github.io"
 baseurl: ""
