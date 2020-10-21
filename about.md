@@ -1,9 +1,10 @@
 ---
 layout: page
-title: About
+title: 병팔?
 permalink: /about/
 ---
 
-I'm Programmer for Python & Django. I've made quite a few web apps, especially on Django. Now, I am doing more on backend.
-
-email: agus[at]python.web.id
+병팔's Blog의 관리자  
+Web 개발자가 되고 싶은 주니어 개발자 입니다~  
+- BackEnd : JAVA, Spring Framework, Python, Oracle, Tomcat  
+- FrontEnd : HTML, Css, JavaScript, JQuery, Ajax
