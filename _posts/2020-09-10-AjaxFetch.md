@@ -1,5 +1,4 @@
-﻿
----
+﻿---
 layout: post
 title:  "Web Ajax fetch"
 date:   2020-09-10

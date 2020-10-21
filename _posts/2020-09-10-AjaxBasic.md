@@ -1,5 +1,4 @@
-﻿
----
+﻿---
 layout: post
 title:  "Web Ajax Basic"
 date:   2020-09-10

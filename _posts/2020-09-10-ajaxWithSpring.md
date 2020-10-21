@@ -1,5 +1,4 @@
-﻿
----
+﻿---
 layout: post
 title:  "Web Spring Ajax"
 date:   2020-09-10

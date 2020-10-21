@@ -1,5 +1,4 @@
-﻿
----
+﻿---
 layout: post
 title:  "Web Spring Mybatis"
 date:   2020-09-15
@@ -8,7 +7,7 @@ categories: [web]
 
 # MVC with Mybatis
 
-### 1. mybatis를 다운 받기 위해 pom.xml에 코드를 추가해 준다.
+### 1. mybatis를 다운 받기 위해 pom.xml에 코드를 추가해 준다.  
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>

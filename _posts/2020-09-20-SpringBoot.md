@@ -1,5 +1,4 @@
-﻿
----
+﻿---
 layout: post
 title:  "Web Spring Boot"
 date:   2020-09-20
@@ -28,8 +27,7 @@ categories: [web]
 ## pom.xml 설정
 
 1.  spring boot starter web 붙여넣기 하고 버전을 지워준다
-2. Spring Boot Starter Tomcat 서버를 추가
-```xml
+2. Spring Boot Starter Tomcat 서버를 추가  ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
