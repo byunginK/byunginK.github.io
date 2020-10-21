@@ -5,20 +5,22 @@ date:   2020-09-09
 categories: [web]
 ---
 
- # 스프링 셋팅
+# 스프링 셋팅
  
- - 스프링 실행후 Help -> 이클립스 마켓플레이스 에서 legacy 다운로드
- - spring legacy 프로젝트 mvc 프로젝트 생성
+- 스프링 실행후 Help -> 이클립스 마켓플레이스 에서 legacy 다운로드
+- spring legacy 프로젝트 mvc 프로젝트 생성
  
- ### 위처럼 하면 자동적으로 기본 셋팅을 스프링이 해준다
+### 위처럼 하면 자동적으로 기본 셋팅을 스프링이 해준다
  
- ### 스프링의 진행 및 모형도
- ![캡처](https://user-images.githubusercontent.com/65350890/91698168-3a683980-ebad-11ea-887f-b0d3d7f69c5f.PNG)
+### 스프링의 진행 및 모형도
+![캡처](https://user-images.githubusercontent.com/65350890/91698168-3a683980-ebad-11ea-887f-b0d3d7f69c5f.PNG)
  
- ## 스프링 처럼 setting 해보기
+## 스프링 처럼 setting 해보기
  
- - 스프링의 실행 경로를 찍어보기위한 log 넣기
- - pom.xml에 log4j와 slf4j simple의 코드를 넣어준다
+- 스프링의 실행 경로를 찍어보기위한 log 넣기
+- pom.xml에 log4j와 slf4j simple의 코드를 넣어준다
+
+
 ```xml
 <dependency>
     <groupId>log4j</groupId>
@@ -34,8 +36,10 @@ categories: [web]
 ```
  
  
- 1. 프로젝트 오른쪽 클릭하여 java EE Tools에서 web.xml을 생성해준다
- - WebContent 에 WEB-INF 에 web.xml이 생성된다.
+1. 프로젝트 오른쪽 클릭하여 java EE Tools에서 web.xml을 생성해준다
+- WebContent 에 WEB-INF 에 web.xml이 생성된다.
+
+
 ```xml
  <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
@@ -100,6 +104,8 @@ categories: [web]
 - 실행했을때 읽혀지는 순서(web.xml -> index.jsp -> controller -> 링크를 찾고 return을 통해 해당하는 jsp 파일을 servlet-context.xml(dispatcherServlet.xml)에서 찾는다. 그리고 views에서 실행)
 
 2. 위의 xml이 읽혀지고 index.jsp로 가게된다
+
+
 ```html
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -117,7 +123,10 @@ response.sendRedirect("home.do"); //해당 이름으로 컨트롤로 가게된�
 </body>
 </html>
 ```
+
 3. 이제 home.do를 가지고 컨트롤러로 가게된다.
+
+
 ```java
 package bit.com.a;
 
@@ -151,7 +160,10 @@ public class HelloController {
 	
 }
 ```
+
 4. 이제 servlet-context.xml(dispatcherServlet.xml) 으로 넘어와 view의 경로와 확장자명을 확인한다
+
+
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
@@ -184,9 +196,12 @@ public class HelloController {
 	
 </beans>
 ```
+
 - context설정과 java공통 패키지에서(컨트롤위치)를 설정하고 view와 확장자를 설정해준다.
 
 5. 이제 WEB-INF/views 파일에서 jsp파일을 모두 읽어 컨트롤에서 return해준 jsp파일로 값을 가지고 가게된다.
+
+
 ```html
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -214,6 +229,8 @@ out.println("name: "+name);
 - 반대로 웹에서 입력된 값을 넘겨받는 방식은 반대이다.
 
 6. 아까 컨트롤러에서 값을 받기위한 메소드를 생성한다
+
+
 ```java
 @RequestMapping(value = "world.do", method = RequestMethod.GET)
 //public String world(int age, String name) {
@@ -225,7 +242,10 @@ public String world(Human h) {
   return "home";
 }
 ```  
+
 7. Human이라는 dto를 생성해준다
+
+
 ```java
 package bit.com.a.dto;
 

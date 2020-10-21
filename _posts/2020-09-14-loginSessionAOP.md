@@ -1,6 +1,6 @@
 ﻿---
 layout: post
-title:  "Web Spring 채팅"
+title:  "Web Spring AOP 로그아웃"
 date:   2020-09-14
 categories: [web]
 ---
@@ -8,6 +8,8 @@ categories: [web]
 # 로그인 세션 확인 AOP 걸어주기
 - 세션에 시간조건을 두어 일정 시간이 지나면 세션이 소멸되기 설정한다
 - 세션이 소멸되면 로그인을 다시 하게끔 설정
+
+
 ### AOP 함수 설정
 ```java
 package bit.com.spring.aop;
@@ -65,6 +67,7 @@ public class LogAop {
 		return "sessionOut.tiles";
 	}
 ```
+
 - 로그인 페이지로 이동하는 컨트롤러 추가
 
 #### - 원래 각 Controller , dao , service 에 Member (longin)과 관련된 클래스가 있었으나 AOP 설정을 위해 따로 패키지를 만들어서 빼준다<br>

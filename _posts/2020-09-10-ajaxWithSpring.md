@@ -360,6 +360,8 @@ $("#btn").click(function(){
 
 ### ajax 예제에 사용했던 Human 객체와 Myclass 객체이다
 - Human
+
+
 ```java
 package bit.com.a.dto;
 
@@ -421,7 +423,10 @@ public class Human implements Serializable {
 	}
 }
 ```
+
 - Myclass
+
+
 ```java
 package bit.com.a.dto;
 

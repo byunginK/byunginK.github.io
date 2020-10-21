@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded",function(){  //라이브러리에�
  </script>
 ```
  
- ### 4. 아래 div 에 id값을 주면 위에서 id속성값을 지정해준곳으로 캘린더가 그려진다
+### 4. 아래 div 에 id값을 주면 위에서 id속성값을 지정해준곳으로 캘린더가 그려진다
 ```html
   
  <!-- 직접 그려지는 부분 -->

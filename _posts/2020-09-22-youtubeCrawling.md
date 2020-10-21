@@ -290,8 +290,10 @@ public class JsonUtils {
 - 실질적으로 JsonUtil에서는 json을 Map으로 바꿔주는 코드만 사용하며, 그안에서도 return받은 map을 사용하는것이 아니라
 중간에 걸러진 key값을 이용해 단어들을 슬라이싱하여 얻어낼 값들을 찾아내고 list에 따로 다시 담아준다.
 
-### 아까 youtubeParser에서 마지막에 youtubeDto 에 값들을 넣어 객체를 생성하고 list에 넣어 뷰에서 뿌려줄 수 있게 하였다.
-- youtubeDto
+- 아까 youtubeParser에서 마지막에 youtubeDto 에 값들을 넣어 객체를 생성하고 list에 넣어 뷰에서 뿌려줄 수 있게 하였다.
+##### youtubeDto
+
+
 ```java
 package bit.com.spring.dto;
 
@@ -345,6 +347,8 @@ public class Youtube implements Serializable {
 ```
 
 ### view 에서는 아래를 참고하여 url의 값을 iframe에 넣어 유튜브를 볼 수 있게 할 수 있다.
+
+
 ```html
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>

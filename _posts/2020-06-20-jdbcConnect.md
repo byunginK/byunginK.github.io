@@ -122,6 +122,8 @@ public class DBClose {   // 해방시키려는 부분은 클래스로 따로 생
 - 데이터에 저장 되어있는 값을 받아와 명시하기 위해서 dto를 생성해주어야 한다.
 - 현재 예제에는 상관이 없지만 Web에서 DB와 java를 연동해서 사용할 경우 dto에 직렬화를 해주어야한다.<br>
 (해당 부분은 네트워크의 TCP 에서 객체를 송/수신할때 한번 언급하였다.)
+
+
 ```java
 package dto;
 
@@ -187,6 +189,8 @@ public class UserDto implements Serializable {  // 직렬화를 해주어야 한
 ## Select Class
 ### 1. 단일 데이터를 검색할때
 - statement 사용
+
+
 ```java
 public UserDto search(String id) {
 		
@@ -227,6 +231,8 @@ public UserDto search(String id) {
 	}
   ```
   - PreparedStatement
+
+
   ```java
   public UserDto select(String id) {
 		
@@ -560,6 +566,8 @@ public class UpdateTest {
 ## Main
 - 우선 update할 id를 지정하고 변경할 age 값도 지정한 후 update 파라미터로 넣어준다.
 - return값은 True, false 이기 때문에 boolean b 를 잡아주고 조건절을 통해 정상적으로 수정 되었는지 확인 할 수 있다.
+
+
 ```java
 package main;
 

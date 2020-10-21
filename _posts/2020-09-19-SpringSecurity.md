@@ -35,6 +35,8 @@ categories: [web]
 ```
 ### 2. web.xml을 설정해준다
 - 필터와 시큐리티 설정xml을 연결해준다
+
+
 ```xml
 <servlet>
   	<servlet-name>dispatcherServlet</servlet-name>
@@ -86,6 +88,8 @@ categories: [web]
 
 ### 3. context-security.xml 을 생성해 준다
 - Namespaces에서 beans 와 security를 체크해서 설정해준다
+
+
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
@@ -157,7 +161,10 @@ isAuthenticated() - 인증을 한 사용자일 경우(로그인한 사용자)
 
 isFullyAuthenticated() - 인증을 한 사용자이면서 Remember-me 기능으로 로그인하지 않은 사용자
 ```
+
+
 ### 4. 아까 만들어둔 로그인 페이지를 접근하는 컨트롤러와 접근 금지 페이지 (뷰)생성
+
 ```java
 package bit.com.a.controller;
 
@@ -180,6 +187,8 @@ public class LoginController {
 ```
 ### 5. view 
  - 로그인 접근 할 수있는 페이지 , 접근 권한을 확인해볼 페이지
+
+
 ```java
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -215,7 +224,11 @@ public class LoginController {
 </body>
 </html>
 ```  
+
+
 - 로그인 페이지 (스프링 제공)
+
+
 ```java
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -259,6 +272,8 @@ public class LoginController {
 </html>
 ```
 - 접근 권한 페이지(로그인시 부여되는 권한으로 접근이 되는 페이지가 있고 거부되는 페이지가 있다 )
+
+
 ```html
 <%@include file="/WEB-INF/include/header.jspf" %>
 </head>
@@ -284,6 +299,8 @@ public class LoginController {
 </html>
 ```
 - 접근 거부 페이지
+
+
 ```java
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -315,6 +332,8 @@ public class LoginController {
 </html>
 ```
 ### 6. 각 접근권한이 걸린 페이지의 컨트롤러
+
+
 ```java
 package bit.com.a.controller;
 
@@ -359,6 +378,8 @@ CREATE TABLE USERTABLE(
 ```
 ### model(dto)를 생성 해준다 (시큐리티에서 설정한 요소들이 들어가 있어야한다)
 - UserDetails, Serializable 두개의 인터페이스를 상속받고 오버라이드 해준다
+
+
 ```java
 package bit.com.a.model;
 
@@ -442,6 +463,8 @@ public class CustomUserDetails implements UserDetails, Serializable {
 ```
 ### DB에 접근하여 회원정보를 꺼내올 쿼리문을 작성해준다
 - parameterType없이 반환되는 값만 있다
+
+
 ```xml
 <mapper namespace="CustUser">
 <select id="selectUserById" resultType="bit.com.a.model.CustomUserDetails">
@@ -452,6 +475,8 @@ public class CustomUserDetails implements UserDetails, Serializable {
 </select>
 ```
 ### dao를 생성해 준다
+
+
 ```java
 package bit.com.a.dao;
 
@@ -475,6 +500,7 @@ public class CustomUserDao {
 ```
 ### service를 생성해주는데, UserDetailsService 을 상속받고 오버라이드 해준다(loadUserByUsername 생성)
 - dao에서 받은 정보들은 model에 담고 반환하는 코드를 작성해준다
+
 
 ```java
 package bit.com.a.service;
@@ -511,6 +537,8 @@ public class CustomUserService implements UserDetailsService {
 ### service에서 인증을 대조하는 클래스 생성( 가장 중요)
 - AuthenticationProvider 상속받고 오버 라이드 해준다
 - 뷰에서 입력받은 정보와 db에서 정보를 가져와 패스워드를 대조하고 최종 아이디, 패스워드 , 권한을 
+
+
 ```java
 package bit.com.a.service;
 

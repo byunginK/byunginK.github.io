@@ -27,7 +27,10 @@ categories: [web]
 ## pom.xml 설정
 
 1.  spring boot starter web 붙여넣기 하고 버전을 지워준다
-2. Spring Boot Starter Tomcat 서버를 추가  ```xml
+2. Spring Boot Starter Tomcat 서버를 추가  
+
+
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -133,6 +136,8 @@ categories: [web]
 </project>
 ```
 3. 서버 포트넘버 충돌로 application.properties에서 포트를 변경해준다
+
+
 ```
 # port
 server.port=3000
@@ -143,8 +148,12 @@ spring.datasource.url=jdbc:oracle:thin:@localhost:1521:xe
 spring.datasource.username=hr
 spring.datasource.password=hr
 ```
+
+
 4. ajax 할때 보안을 허가해주어야한다. WebMvcConfigurer 상속받은 클래스 WebConfig 생성 (addCorsMappings 오버라이드)
 5. @Configuration 달아주고 오버라이드 해준다
+
+
 ```java
 package bit.com.a;
 
@@ -167,7 +176,10 @@ public class WebConfig implements WebMvcConfigurer {
 ## 이렇게 설정후 view쪽 ajax와 서로 값을 주고 받을 수 있게 된다 (프론트)
 ### 예를 들어
 - view (이클립스로 서버를 따로 돌려서 뷰만 표현)
+
+
 ![image](https://user-images.githubusercontent.com/65350890/93600101-18b6e100-f9fa-11ea-80fa-e95b64cc58ee.png)
+
 
 ```html
 <!DOCTYPE html>
@@ -280,6 +292,8 @@ $(document).ready(function(){
 ```
 ### 백엔드 
 - 어노테이션에 그냥 컨트롤러가 아닌 RestController를 
+
+
 ```java
 package bit.com.a.controller;
 
@@ -377,6 +391,8 @@ public class DatabaseConfig {
 - 아까 application.properies 참고
 
 ### 3. application클래스에서 mapperscan 추가
+
+
 ```java
 package bit.com.a;
 
@@ -395,6 +411,8 @@ public class SpringBootTestApplication {
 }
 ```
 #### 그리고 sqls 폴더 생성후 xml 파일 생성은 동일하나 약간 다른점은 namespace부분이다.
+
+
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
@@ -410,6 +428,8 @@ public class SpringBootTestApplication {
 ```
 
 ### dao는 인터페이스를 생성하고 이전 spring 에서 처럼 인터페이스를 상속받는 클래스는 생성하지 않고 위에 적어준 namespace를 따라가기 때문에 메소드만 선언한다
+
+
 ```java
 package bit.com.a.dao;
 
@@ -430,6 +450,8 @@ public interface MemberDao {
 }
 ```
 ### service는 인터페이스를 생성하지 않고 바로 클래스를 생성하고 Transactional 어노테이션을 추가한다
+
+
 ```java
 package bit.com.a.service;
 

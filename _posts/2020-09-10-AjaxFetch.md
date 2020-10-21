@@ -27,6 +27,8 @@ categories: [web]
 
 ### 예제
 1. 본문
+
+
 ```html
   <ol id="nav">
  
@@ -34,6 +36,7 @@ categories: [web]
 ```  
 
 2. ajax 부분
+
 
 ```html
 <script>
@@ -60,10 +63,14 @@ categories: [web]
   
   </script>
 ```
+
 3. list 파일
+
+
 ```html
 html,css,javascript,ajax
 ```
+
 - 리스트의 값들
 
 
@@ -77,7 +84,9 @@ https://github.com/github/fetch
 
 해당 깃허브의 fetch.js가 있다. 그리고 스크립트를 추가해 주면 위에서 사용하였던 ajax fetch API를 이용할 수 있다.
 
+
 ```html
  <script src="../fetch.js"></script>
 ```
+
 -만약 호환이 되는 브라우저의 경우 해당 설정을 하여도 다운로드만되고 활성화 되지 않는다.

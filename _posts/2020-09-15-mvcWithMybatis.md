@@ -475,6 +475,8 @@ jdbc.maxActive = 20
 ### 7. dao, service, controller 을 생성해준다. dao, service는 인터페이스를 생성해준다. 그리고 어노테이션을 그 역할에 맡게 생성해주어야한다
 
 - controller
+
+
 ```java
 package bit.com.a.controller;
 
@@ -512,6 +514,8 @@ public class MemberController {
 }
 ```
 - service interface
+
+
 ```java
 package bit.com.a.service;
 
@@ -525,6 +529,8 @@ public interface MemberService {
 }
 ```
 - service 
+
+
 ```java
 package bit.com.a.service.impl;
 
@@ -550,6 +556,8 @@ public class MemberServiceimpl implements MemberService {
 }
 ```
 - dao interface
+
+
 ```java
 package bit.com.a.dao;
 
@@ -563,6 +571,8 @@ public interface MemberDao {
 }
 ```
 - dao
+
+
 ```java
 package bit.com.a.dao.impl;
 

@@ -9,6 +9,8 @@ categories: [web]
 
 ### Json 파일을 ajax를 사용하여 html에 출력
 - Json
+
+
 ```json
 [
 	{
@@ -31,7 +33,10 @@ categories: [web]
 	}
 ]
 ```
+
 - html
+
+
 ```html
 <p id='demo'></p>
 <br>
@@ -79,11 +84,13 @@ $(function() {
 });
 </script>
 ```
-<br><br>
+
 ---
 # xml passing
 ### xml 파일을 ajax를 사용하여 html에 출력
 - xml
+
+
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <xmldata>
@@ -104,7 +111,10 @@ $(function() {
 	</news>
 </xmldata>
 ```
+
 - html
+
+
 ```html
 <p id='demo'></p>
 <br>

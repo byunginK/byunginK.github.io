@@ -83,7 +83,9 @@ function getlistData(pNumber){
 ```
 
 ### url 주소에 넘어오는 파라미터를 이용하여 값을 얻어오는 방식사용
-- 자바 스크립트 방식으로 location.search를 하게되면 ?를 포함한 그 뒤의 url주소를 가져온다
+##### * 자바 스크립트 방식으로 location.search를 하게되면 ?를 포함한 그 뒤의 url주소를 가져온다
+
+
 ```javascript
 <script type="text/javascript">
 /* url 주소를 통해 파라미터를 받는 부분 */
@@ -96,14 +98,17 @@ let urlParams = location.search.split(/[?&]/).slice(1).map(function(paramPair) {
 
 </script>
 ```
-- header에 위처럼 선언을 해주면 아래 처럼 키값으로 접근이 가능하다
+##### * header에 위처럼 선언을 해주면 아래 처럼 키값으로 접근이 가능하다
+
 
 ```javascript
 let seq = urlParams.seq;
 ```
 
 # 파일 다운로드
-- Controller
+##### Controller
+
+
 ```java
 package bit.com.a.controller;
 
@@ -190,6 +195,8 @@ public class FileController {
 }
 ```
 ### 다운로드시 필요한 util
+
+
 ```java
 package bit.com.a.util;
 
@@ -213,6 +220,8 @@ public class MediaTypeUtiles {
 }
 ```
 ### html 보여지는 
+
+
 ```html
 <!DOCTYPE html>
 <html>

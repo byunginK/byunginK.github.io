@@ -9,6 +9,8 @@ categories: [web]
 - 이미 만들어져 있는 플러그인을 사용하여 페이징을 쉽게 할 수 있다.
 - 깃허브 twbs-pagination-master를 알집을 다운 받는다 (url:https://github.com/josecebe/twbs-pagination)
 - 안에 파일들 중 jquery.twbsPagination.min.js 를 끌어와서 사용하면 된다.
+
+
 ```html
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -66,10 +68,12 @@ $("#pagination").twbsPagination({
 </html>
 ```
 
-- 아래 처럼 만들어서 넣어놓고 링크로 불러온다<br>
+- 아래 처럼 만들어서 넣어놓고 링크로 불러온다<br/>
 ![image](https://user-images.githubusercontent.com/65350890/92581448-ab54d300-f2ca-11ea-968f-907976ed1a94.png)
 
 - 아래는 해당 자바스크립트의 함수에 대한 더 자세한 설명이다
+
+
 ```
 $('#pagination').twbsPagination({
     totalPages: 35,	// 총 페이지 번호 수
