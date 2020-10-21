@@ -39,7 +39,7 @@ urls:
       url: /feed.xml
 
 url: "https://byunginK.github.io"
-baseurl: "/byunginK.github.io/"
+baseurl: ""
 paginate: 20
 per_page: 20
 paginate_path: "/page/:num/"
