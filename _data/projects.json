@@ -4,12 +4,14 @@
 		"name": "coffee Program (AWT)",		
 		"url": "https://github.com/byunginK/TIL/tree/master/JDBC/coffeeProgram",
 		"date": "Jul 2020",
+		"image": "coffee.jpg",
 		"tags": ["Java","AWT"]
 	},
 	{
 		"slug": "AccountBook",
 		"name": "AccountBook",
 		"url": "https://github.com/byunginK/TIL/tree/master/JDBC/AccountBook",
+		"image": "accountbook.jpg",
 		"date": "Jul 2020",
 		"tags": ["Java","AWT"]
 	},
@@ -18,6 +20,7 @@
 		"name": "BlackJack",
 		"url": "https://github.com/byunginK/TIL/tree/master/black%20jack",
 		"date": "June 2020",
+		"image": "BlackJack.jpg",
 		"tags": ["Java"]
 	},
 	{
@@ -25,6 +28,7 @@
 		"name": "BaseBall Player Management",
 		"date": "June 2020",
 		"url": "https://github.com/byunginK/TIL/tree/master/BaseBall%20UI",
+		"image": "BaseBall Player Management.jpg",
 		"tags": ["Java"]
 	},
 	{
@@ -32,6 +36,7 @@
 		"name": "SimpleFive Project",
 		"url": "https://github.com/ukyung0329/SemiProject",
 		"date": "Sep 2020",
+		"image": "simplefive.jpg",
 		"tags": ["Java","JSP","Oracle"]
 	},
 	{
@@ -39,6 +44,7 @@
 		"name": "PaperHouse Project",
 		"url": "https://github.com/drexqq/bit-final-project",
 		"date": "Oct 2020",
+		"image": "paperhouse.jpg",
 		"tags": ["Spring boot","Oracle","HTML"]
 	},
 	{
@@ -46,6 +52,7 @@
 		"name": "San Project",
 		"url": "https://github.com/byunginK/sanproject",
 		"date": "Oct 2020",
+		"image": "san.jpg",
 		"tags": ["Spring","Oracle","JSP"]
 	}
 ]
