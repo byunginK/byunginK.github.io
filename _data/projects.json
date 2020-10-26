@@ -1,6 +1,6 @@
 [
 	{
-		"slug": "coffee project",
+		"slug": "coffeeProject",
 		"name": "coffee Program (AWT)",		
 		"url": "https://github.com/byunginK/TIL/tree/master/JDBC/coffeeProgram",
 		"date": "Jul 2020",
@@ -24,7 +24,7 @@
 		"tags": ["Java"]
 	},
 	{
-		"slug": "BaseBall Player Management",
+		"slug": "BaseBallPlayerManagement",
 		"name": "BaseBall Player Management",
 		"date": "June 2020",
 		"url": "https://github.com/byunginK/TIL/tree/master/BaseBall%20UI",

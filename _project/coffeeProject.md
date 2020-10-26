@@ -1,7 +1,7 @@
 ---
 layout: project_single
 title:  "coffee Program (AWT)"
-slug: "coffee project"
+slug: "coffeeProject"
 ---
 ### Java AWT와 JDBC를 활용하여 커피주문 프로그램 구현
 
