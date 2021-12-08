@@ -1,7 +1,7 @@
 # Site settings
-title: byungin's blog # site title
+title: Byungin's blog # site title
 description: >- # site description
-  study everyday for programming <a href="https://byungink.github.io/" target="_blank" rel="noopener">@github</a>.
+  Study everyday for programming <a href="https://byungink.github.io/" target="_blank" rel="noopener">@github</a>.
 lang: ko # default lang
 timezone: Asia/Seoul # set your timezone
 image: assets/img/catPink.png # This image used for Open Graph more info https://ogp.me/
