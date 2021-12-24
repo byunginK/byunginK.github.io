@@ -18,7 +18,8 @@ apt install docker.io
 ## window에 설치
 
 1. 도커사용을 위해 wsl2을 사용해야한다. (wsl2의 자세한 내용은 링크 참조)
-- [WSL(Windows Subsystem for Linux)](https://docs.microsoft.com/ko-kr/windows/wsl/compare-versions#wsl-2-architecture)
+
+[WSL(Windows Subsystem for Linux)](https://docs.microsoft.com/ko-kr/windows/wsl/compare-versions#wsl-2-architecture)
 
 2. "Linux용 Windows 하위 시스템" 옵션 기능 사용
 
