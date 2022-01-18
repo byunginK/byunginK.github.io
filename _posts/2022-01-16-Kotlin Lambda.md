@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Kotlin function"
-date: 2022-01-16
+title: "Kotlin Lambda"
+date: 2022-01-17
 categories: [Kotlin]
 ---
 
