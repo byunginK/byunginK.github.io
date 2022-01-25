@@ -138,6 +138,7 @@ fun main() {
     }
 }
 /* 의도치 않게 shortFunc2 처리가 전부 되기 전에 return 되어 버림
+결과
 Before calling out()
 First call: 3
  */
@@ -163,6 +164,83 @@ inline fun shortFunc2(a: Int, crossinline out: (Int) -> Unit) {
     println("Before calling out()")
     out(a)
     println("After calling out()")
+}
+```
+
+만약 return을 사용 하려면 라벨을 사용하게 된다. 아래는 기존 비지역 반환 코드
+
+```kotlin
+fun main() {
+    retFunc() //결과 : Start of Func
+}
+
+inline fun inLineLambda(a: Int,b:Int, out: (Int, Int) -> Unit){
+    out(a,b)
+}
+
+fun retFunc(){
+    println("Start of Func")
+    inLineLambda(12,3){ a, b ->
+        val result = a + b
+        if(result > 10) return // 비지역 반환이 되기 때문에 함수 자체를 벗어난다.
+        println("result : $result")
+    }
+    println("End of Func")
+}
+```
+
+라벨을 사용하여 return
+
+```kotlin
+fun main() {
+    retFunc()
+//결과
+//Start of Func
+//End of Func
+}
+
+inline fun inLineLambda(a: Int,b:Int, out: (Int, Int) -> Unit){
+    out(a,b)
+}
+
+fun retFunc(){
+    println("Start of Func")
+    inLineLambda(12,3)lit@{ a, b ->
+        val result = a + b
+        if(result > 10) return@lit
+        println("result : $result")
+    }
+    println("End of Func")
+}
+```
+
+암묵적인 라벨도 가능하다. 람다식 표현식 블록에 직접 라벨을 쓰는 것이 아닌 람다식 함수의 명칭을 그대로 라벨처럼 사용할 수 있는데 이것을 암묵적 라벨이라고 한다.
+
+```kotlin
+fun retFunc() {
+    println("start of retFunc")
+    inlineLambda(13, 3) { a, b ->
+        val result = a + b
+        if(result > 10) return@inlineLambda
+        println("result: $result")
+    }
+    println("end of retFunc")
+}
+```
+
+## 익명 함수
+
+물론 람다식 함수 표현식 대신에 익명 함수를 넣을 수도 있습니다. 익명 함수는 앞서 배운 것 처럼 fun (...) {...} 형태로 이름 없이 특정 함수의 인자로 넣을 수 있다. 이때는 익명함수 내부에서 라벨을 사용하지 않고 단순히 return만 사용하더라도 비지역 반환이 일어나지 않습니다. 따라서 일반 함수의 반환처럼 편하게 사용할 수 있다.
+
+```kotlin
+fun retFunc(){
+    println("Start of Func")
+    inLineLambda(12,3, fun (a, b){
+        val result = a + b
+        if(result > 10) return //비지역 반환이 일어나지 않는다.
+        println("result: $result")
+    }) //inlineLambda()함수의 끝
+    println("End of Func")
 }
 ```
 
