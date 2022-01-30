@@ -118,3 +118,110 @@ fun main() {
     parrot.fly()
 }
 ```
+
+## super, this
+
+super를 사용하면 상위 클래스의 프로퍼티나 메서드, 생성자를 사용할 수 있다.
+
+this를 이용해 프로퍼티, 메서드, 생성자 등을 참조할 수 있다.
+
+```kotlin
+open class Person {
+    constructor(firstName: String) {
+        println("[Person] firstName: $firstName")
+    }
+    constructor(firstName: String, age: Int) { // ③
+        println("[Person] firstName: $firstName, $age")
+    }
+}
+
+class Developer: Person {
+
+    constructor(firstName: String): this(firstName, 10) { // ①
+        println("[Developer] $firstName")
+    }
+    constructor(firstName: String, age: Int): super(firstName, age) { // ②
+        println("[Developer] $firstName, $age")
+    }
+}
+
+fun main() {
+    val sean = Developer("Sean") // 시작
+}
+```
+
+## 캡슐화
+
+메서드, 프로퍼티의 접근 범위 가시성을 아래와 같이 지정할 수 있다.
+
+- private: 이 지시자가 붙은 요소는 외부에서 접근할 수 없다.
+- public: 이 요소는 어디서든 접근이 가능하다. (기본값)
+- protected: 외부에서 접근할 수 없으나 하위 상속 요소에서는 가능하다.
+- internal: 같은 정의의 모듈 내부에서는 접근이 가능하다.
+
+```kotlin
+private class PrivateText {
+    private var i = 1
+    private fun privatFunc(){
+        i += 1
+        println(i)
+    }
+    fun access(){ //public
+        privatFunc()
+    }
+}
+
+class OtherClass {
+    // val pc = PrivateText() 클래스에서 공개 생성 불가
+    fun test() {
+        val pc = PrivateText() // 분리된 함수에서는 생성 가능
+        pc.access()
+    }
+}
+
+fun main() {
+    val pc = PrivateText()
+    // pc.i = 3 접근 불가
+    // pc.privatFunc() 접근 불가
+    pc.access()
+}
+```
+
+- 아래는 protect에 대한 예시
+
+```kotlin
+open class Base{
+    protected var i = 1
+    protected fun protectedFunc(){
+        i += 1
+        println(i)
+    }
+    fun access() {
+        protectedFunc()
+    }
+}
+
+class Derived : Base() {
+    var j = 1 + i
+    fun derivedFunc(): Int{
+        protectedFunc() // Base 클래스의 메서드 접근 가능
+        return i // Base 클래스의 프로퍼티 접근 가능
+    }
+}
+
+class Other {
+    fun other() {
+        val base = Base()
+        // base.i = 3 접근 불가가
+    }
+}
+
+fun main() {
+    val base = Base()
+    base.access()
+
+    val derived = Derived()
+    derived.j = 3
+    derived.derivedFunc()
+}
+```
