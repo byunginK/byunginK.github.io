@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Kotlin data Class"
+title: "Kotlin kind of Class"
 date: 2022-02-01
 categories: [Kotlin]
 ---
@@ -12,7 +12,7 @@ categories: [Kotlin]
 
 데이터 클래스 선언시 `data` 키워드 사용
 
-```kotiln
+```kotlin
 data class Customer(var name: String, var email: String)
 ```
 
