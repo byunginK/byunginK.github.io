@@ -160,3 +160,78 @@ fun main() = runBlocking(Dispatchers.Default){
     println("end of runBlocking") // 4
 }
 ```
+
+##### 종류
+
+1. Dispatchers.Default는 기본 문맥인 CommonPool에서 실행되기 때문에 새로운 스레드를 생성하지 않고 기존에 있는 것을 이용합니다. 그러므로 연산 중심의 코드에 적합
+
+2. Dispatchers.IO는 입출력에 적합한 공유 풀로써, 볼로킹 동작이 많은 파일 or 소켓 I/O 처리에 사용하면 좋다.
+
+3. Unconfined 문맥은 비한정 문맥에서 실행된 코루틴은 첫번째 중단점을 만날때까지만 호출자 스레드에서 실행됩니다. 중단점 이후에 재개 되었을때는 서스펜드 함수가 실행된 스레드에서 수행됩니다. 그렇기 때문에 비한정 문맥은 예측 불능한 상태로 수행되기 때문에 해당 기능을 사용하는 것은 권장되지 않는다.
+
+4. newSingleThreadContext는 새로운 스레드가 생성되기 때문에 비용이 많이 들고 더 이상 필요하지 않으면 해제하거나 종료시켜야 합니다. 부모 코루틴이 취소되는 경우 자식 코루틴도 재귀적으로 취소
+
+### withContext(context)
+
+인자로 코루틴 문맥을 지정하며 해당 문맥에 따라 코드 블록을 실행한다. 해당 코드 블록은 다른 스레드에서 수행되며 결과를 반환. 부모 스레드를 블록하지 않는다.
+
+#### 빌더의 속성
+
+launch빌더의 속성은 context, start, parent, onCompletion이 있으며, 그중 start속성은 다양한 옵션이 있다.
+
+1. DEFAULT : 즉시 시작
+2. LAZY : 코루틴을 느리게 시작 (블록을 중단하며 start()나 await()으로 시작)
+3. ATOMIC : 원자적으로 즉시 시작 (DEFAULT와 비슷하나 코루틴 실행을 무조건 진행 실행전 취소 불가)
+4. UNDISPATCHED : 현재 스레드에서 즉시 시작
+
+### 스코프
+
+모든 코루틴들은 각자의 스코프를 갖습니다. 그래서 runBlocking{ } 코루틴 빌더등을 이용해 생성 된 코루틴 블록 안에서 launch{ } 코루틴 빌더를 이용하여 새로운 코루틴을 생성하면 현재 위치한 부모 코루틴에 join() 을 명시적으로 호출할 필요 없이 자식 코루틴들을 실행하고 종료될 때까지 대기 할 수 있다.
+
+특정 스코프를 정의하고 하위에 코루틴 블록을 정의하면 해당 코루틴은 그 스코프에 의해 제어되는 자식이다.
+
+만일 어떤 코루틴들을 위한 사용자 정의 스코프가 필요한 경우가 있다면 coroutineScope{ } 빌더를 이용할 수 있습니다. 이 빌더를 통해 생성 된 코루틴은 모든 자식 코루틴들이 끝날때까지 종료되지 않는 스코프를 정의하는 코루틴이다.
+
+아래 코드 및 주석 확인
+
+```kotlin
+fun main() = runBlocking {
+    println("runBlocking : $coroutineContext")
+    val request = launch {
+        println("request: $coroutineContext")
+        GlobalScope.launch { // 프로그램 전역으로 독립적인 수행
+            println("job1: before suspend function, $coroutineContext")
+            delay(1000)
+            println("job1: after suspend function, $coroutineContext")
+        }
+        launch { //부모의 문맥을 상속(상휘 launch의 자식) //1
+        //launch(Dispatchers.Default){ //부모의 문맥을 상속(상위 launch의 자식) 2
+        //CoroutineScope(Dispatchers.Default).launch{ //새로운 스코프가 구성됨 request와 무관 3
+            delay(100)
+            println("job2: before suspend function, $coroutineContext")
+            delay(1000)
+            //request(부모)가 취소되어도 취소되지 않음
+            println("job2: after suspend function, $coroutineContext")
+        }
+    }
+    delay(200)
+    request.cancel()// 부모의 코루틴 취소
+    delay(1000)
+}
+```
+
+_결과_
+
+- launch (1) : job2 after가 실행되지 않고 코루틴 취소
+- launch(Dispatchers.Default) (2) : 위와 동일
+- CoroutineScope(Dispatchers.Default).launch : job2 after까지 전부 실행
+
+### MainScope
+
+MainScope는 UI 컴포넌트를 위한 스코프입니다. MainScope는 SupervisorJob을 생성하고 이 스코프에서 만들어진 모든 코루틴을 Main스레드에서 실행합니다. SupervisorJob을 생성하기 때문에 하나의 코루틴이 예외를 던지면서 실패해도 다른 코루틴들은 취소되지 않습니다.
+
+자식 코루틴의 실패는 CoroutineExceptionHandler를 사용하여 처리 할 수 있습니다.
+
+### runBlocking()
+
+runBlocking은 새로운 코루틴을 시작하고 코루틴이 완료될 때까지 현재 스레드를 차단합니다. 일시 중단 및 논블록킹 스타일로 작성된 일반 블록 코드와 라이브러리를 연결하도록 설계되어 있다.
