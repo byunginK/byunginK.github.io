@@ -114,7 +114,7 @@ class MainActivity : AppCompatActivity() {
 
 서로 맵핑을 id를 통해 하며 layout xml에서도 각 태그에게 `android:id`를 부여하고 `findViewById()`에서도 인자로 `android:id`를 넣어주면 값을 가져온다.
 
-1. activity_main.xml
+**activity_main.xml**
 
 ```xml
 ...
@@ -142,7 +142,7 @@ class MainActivity : AppCompatActivity() {
 ...
 ```
 
-2. MainActivity.kt
+**MainActivity.kt**
 
 ```java
 val heightEditText: EditText = findViewById(R.id.heightEditText)
@@ -196,10 +196,10 @@ resultButton.setOnClickListener {
 
 메시징 객체로 화면간 또는 통신시 값을 전달하는 용도로 사용된다.
 
-- 인텐트 전송 흐름
-  ![image](https://user-images.githubusercontent.com/65350890/152677124-1d9a3d77-3170-47b7-ba33-4ef3ff51d60c.png)
+**인텐트 전송 흐름**
+![image](https://user-images.githubusercontent.com/65350890/152677124-1d9a3d77-3170-47b7-ba33-4ef3ff51d60c.png)
 
-- 예제코드
+**예제코드**
 
 ```java
 //Intent에 다음 열릴 엑티비티 자바 파일을 담고 startActivity()로 시작을 해준다.
