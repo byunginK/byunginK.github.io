@@ -28,7 +28,7 @@ Default 레이아웃으로 설정되어 있으며, `androidx.constraintlayout.wi
 3. start = 왼쪽
 4. end = 오른쪽
 
-` app:layout_constraintTop_toTopOf`를 예시로 살펴보면 `constraintTop`은 시작 요소의 위쪽과 `toTopof`는 다음요소의 포지션(위쪽)을 연결한다는 의미이다.
+`app:layout_constraintTop_toTopOf`를 예시로 살펴보면 `constraintTop`은 시작 요소의 위쪽과 `toTopof`는 다음요소의 포지션(위쪽)을 연결한다는 의미이다.
 
 ### 추가 속성
 
@@ -150,6 +150,10 @@ private fun initRunButton() {
 ### getRandomNumber
 
 6개의 랜덤 숫자를 list에 담아서 반환한다.
+
+#### apply()
+
+반환값이 없으며, `this`로 앞 객체를 받아서 적용 및 설정할 수 있다. 따라서 보통 객체의 초기화 값을 할때 이용된다. 아래 코드에서는 `mutableListOf<Int>`를 `this`로 받아서 값을 `add()`하는것을 볼 수 있다.
 
 ```java
 private fun getRandomNumber(): List<Int> {
