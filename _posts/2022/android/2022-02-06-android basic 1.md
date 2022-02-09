@@ -224,3 +224,7 @@ class ResultActivity : AppCompatActivity() {
     }
 }
 ```
+
+## 결과
+
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/65350890/153207050-8b453698-c88d-40c2-8bc5-275195a4ef5d.gif)

@@ -237,3 +237,7 @@ private fun initClearButton() {
     }
 }
 ```
+
+## 결과
+
+![lotto](https://user-images.githubusercontent.com/65350890/153207641-beb5bf04-bc7b-4dca-b38f-6e4f28c1d00d.gif)
