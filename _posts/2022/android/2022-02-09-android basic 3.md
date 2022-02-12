@@ -108,3 +108,44 @@ private fun showErrorAlertDialog(){
         .show()
 }
 ```
+
+## runnable
+
+Main UI를 작동하는 쓰레드 이외에 별도의 쓰레드를 생성
+`Runnable{}`인터페이스 람다식을 이용하여 입력한 텍스트를 `sharedPreferences`에 저장하도록 구현
+
+```java
+//별도 쓰레드로 잠깐 멈췄을때 저장
+val runnable = Runnable {
+    getSharedPreferences("diary",Context.MODE_PRIVATE).edit {
+        putString("detail", diaryEditText.text.toString())
+    }
+    Log.d("DiaryActivity", "SAVE ${diaryEditText.text.toString()}")
+}
+```
+
+## addTextChangedListener
+
+텍스트가 변경될 때마다 이벤트가 작동하도록하는 리스너이다.
+`diaryEditText`라는 `EditText`에서 텍스트가 변경될때마다 저장되도록 기능 구현.
+
+**`Handler`를 통해 main쓰레드와 runnable쓰레드를 연결하도록한다.**'
+Handler를 사용하는 이유는 비동기적(Asynchronous)으로 어떤 Job을 처리하기 위해.
+※ Activity의 Main thread는 UI thread라고 불리며, UI를 처리할 때 시간이 오래 걸리는 작업을 수행하면 화면이 버벅이거나 ANR(Android Not Responding)과 같은 문제가 발생.
+Handler는 Looper라는 객체를 통해 동작한다. 1개의 Thread에 1개의 Looper가 있다.
+
+```java
+//main UI쓰레드와 별도 쓰레드를 핸들러를 통해서 연결
+private val handler = Handler(Looper.getMainLooper())
+
+//텍스트가 바뀔때마다 이벤트 작동
+diaryEditText.addTextChangedListener {
+    Log.d("DiaryActivity", "TextCahnged::$it")
+    handler.removeCallbacks(runnable) //이전에 있는 변화를 우선 지운다
+    handler.postDelayed(runnable, 500)
+}
+```
+
+```
+diaryEditText 텍스트 변경 -> addTextChangedListener 이벤트 작동 -> main 쓰레드에서 removeCallbacks을 통해 0.5초 이전에 작성된 텍스트는 저장하지 않도록 제거 -> 만약 0.5초가 지나면 저장 (0.5초 지연은 postDelayed()를 통해 진행)
+```
