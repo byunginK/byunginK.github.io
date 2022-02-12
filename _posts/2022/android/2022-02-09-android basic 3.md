@@ -53,6 +53,45 @@ private val numberPicker3: NumberPicker by lazy {
 }
 ```
 
+## Thema
+
+res파일에 values -> themaes의 xml을 통해 앱의 전체 테마를 스타일 적용 할 수 있다.
+
+```xml
+<style name="Theme.Aoppart2chapter03.NoActionBar" parent="Theme.MaterialComponents.DayNight.NoActionBar"/>
+```
+
+style을 추가하여 상단에 액션바가 없는 스타일을 상속받아왔고 해당 Thema를 `manifest`의 activity 속성의 thema에 `name`으로 바인딩 해주면 적용된다.
+
+```xml
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="fastcampus.aop.part2.chapter03">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Aoppart2chapter03">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Aoppart2chapter03.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".DiaryActivity"
+            android:theme="@style/Theme.Aoppart2chapter03.NoActionBar" />
+    </application>
+
+</manifest>
+```
+
 ## sharedPreference
 
 로컬 DB 저장 또는 파일에 저장하는 방식으로 값을 저장할 수 있으며, `sharedPreference`는 파일에 값을 저장하고 꺼내서 사용할 수 있게 한다.
