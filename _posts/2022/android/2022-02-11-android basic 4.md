@@ -5,7 +5,7 @@ date: 2022-02-11
 categories: [Kotlin]
 ---
 
-## UI
+# UI
 
 ### TableLayout
 
@@ -39,10 +39,12 @@ Row에 표현된 요소들이 범위를 벗어날때 해당 속성을 이용하�
 Activity파일에서 함수로 바로 로직 구현이 가능하다.
 
 ```xml
+<!-- xml -->
 android:onClick="clearButtonClicked"
 ```
 
 ```java
+// kotiln
 fun clearButtonClicked(v: View) {
     expressionTextView.text = ""
     resultTextView.text = ""
@@ -115,7 +117,9 @@ ssb.setSpan(
     Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
 ```
 
-## Back
+---
+
+# Back
 
 ### 확장함수
 
@@ -168,7 +172,6 @@ fun resultButtonClicked(v: View) {
 
 Room을 사용하여 로컬 데이터베이스에 데이터를 저장 및 조회하여 사용 할 수 있다.
 
-```
 상당한 양의 구조화된 데이터를 처리하는 앱은 데이터를 로컬에 유지하여 매우 큰 이익을 얻을 수 있습니다. 가장 일반적인 사용 사례는 기기가 네트워크에 액세스할 수 없을 때도 사용자가 오프라인 상태로 계속 콘텐츠를 탐색할 수 있도록 관련 데이터를 캐시하는 것입니다.
 
 Room 지속성 라이브러리는 SQLite를 완벽히 활용하면서 원활한 데이터베이스 액세스가 가능하도록 SQLite에 추상화 계층을 제공합니다. 특히 Room을 사용하면 다음과 같은 이점이 있습니다.
@@ -176,8 +179,7 @@ Room 지속성 라이브러리는 SQLite를 완벽히 활용하면서 원활한 
 - SQL 쿼리의 컴파일 시간 확인
 - 반복적이고 오류가 발생하기 쉬운 상용구 코드를 최소화하는 편의 주석
 - 간소화된 데이터베이스 이전 경로
-이러한 점을 고려할 때 SQLite API를 직접 사용하는 대신 Room을 사용하는 것이 좋습니다.
-```
+  이러한 점을 고려할 때 SQLite API를 직접 사용하는 대신 Room을 사용하는 것이 좋습니다.
 
 #### 1. gradle 종속 추가
 
