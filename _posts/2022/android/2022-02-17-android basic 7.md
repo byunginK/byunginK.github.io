@@ -12,7 +12,7 @@ categories: [Kotlin]
 재생, 녹음, 중지등의 상태에 따라 화면 아이콘이 변경되는데 이것을
 kotiln으로 값에 따라 변경되도록 구성
 
-1. 상태들을 Enum으로 구성
+● 상태들을 Enum으로 구성
 
 ```java
 enum class State {
@@ -23,7 +23,7 @@ enum class State {
 }
 ```
 
-2. 이미지를 상태에 따라 set하는 로직 구성
+● 이미지를 상태에 따라 set하는 로직 구성
 
 ```java
 //AppCompatImageButton 안드로이드 호환성 문제로 다른 버전에도 적용하기위한 클래스 상속
@@ -47,7 +47,7 @@ class RecordButton(context: Context, attrs: AttributeSet): AppCompatImageButton(
 }
 ```
 
-3. MainActivity에서 실행되는 메소드에 따라 상태 변경
+● MainActivity에서 실행되는 메소드에 따라 상태 변경
 
 ```java
 //위에서 설정한 버튼 클래스를 상속
@@ -58,6 +58,7 @@ private val recordButton: RecordButton by lazy {
 private var state = State.BEFORE_RECORDING
     set(value) {
         field = value
+        resetButton.isEnabled = (value == State.AFTER_RECORDING) || (value == State.ON_PLAYING)
         recordButton.updateIconWithState(value)
     }
 
@@ -94,15 +95,15 @@ private fun bindViews() {
 
 아래 이미지는 권한 요청 동작 흐름이다.
 
-![image](https://user-images.githubusercontent.com/65350890/154492408-ccc1422c-265e-45e9-9031-c9a38a74f4f4.png)
+![image](https://user-images.githubusercontent.com/65350890/154689195-2ebf399e-46ed-4553-9dfb-cc6dfbe6a306.png)
 
-1. manifest에 사용할 권한을 추가해 준다.
+● manifest에 사용할 권한을 추가해 준다.
 
 ```xml
 <uses-permission android:name="android.permission.RECORD_AUDIO"/>
 ```
 
-2. Activity에서 권한 요청에대한 코드를 구성한다.
+● Activity에서 권한 요청에대한 코드를 구성한다.
 
 ```java
 //manifest에 설정한 권한을 배열로 담아 선언해 놓는다.
