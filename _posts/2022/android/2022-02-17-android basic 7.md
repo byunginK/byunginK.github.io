@@ -85,6 +85,108 @@ private fun bindViews() {
 각 메서드가 실행되면서 `stat` 변수 값이 변경되고 `set`을 통해
 `recordButton.updateIconWithState(value)`으로 이미지 변경
 
+### Custom Drawing
+
+● Paint 클래스: Paint 클래스는 기하 도형, 텍스트 및 비트맵을 그리는 방법에 대한 스타일 및 색상 정보를 보유
+● onDraw메소드 : onDraw()의 매개변수는 뷰에서 자기 자신을 그릴 때 사용할 수 있는 Canvas 객체입니다. Canvas 클래스는 텍스트, 선, 비트맵 및 기타 여러 그래픽 프리미티브를 그리기 위한 메서드를 정의
+
+예를 들어, Canvas는 선을 그릴 수 있는 메서드를 제공하고 Paint는 선의 색상을 정의하는 메서드를 제공합니다. Canvas에는 직사각형을 그리는 메서드가 있는 반면 Paint는 직사각형을 색으로 채울지 또는 비워 둘지 정의합니다. 간단히 말해, Canvas는 화면에 그릴 수 있는 도형을 정의하고, Paint는 그리는 각 도형의 색상, 스타일, 글꼴 등을 정의
+
+```java
+override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+    super.onSizeChanged(w, h, oldw, oldh)
+    drawingWidth = w
+    drawingHeight = h
+}
+```
+
+view의 화면크기가 변화 할때마자 사이즈 값을 파라미터로 return
+
+```java
+//곡선이 부드럽게 그려진다.
+private val amplitudePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+    color = context.getColor(R.color.purple_500)
+    strokeWidth = LINE_WIDTH
+    strokeCap = Paint.Cap.ROUND //양끝 처리
+}
+private var drawingAmplitudes: List<Int> = emptyList()
+
+//음량의 크기에 따라 값을 가지고 그려줌
+override fun onDraw(canvas: Canvas?) {
+    super.onDraw(canvas)
+
+    canvas ?: return
+
+    val centerY = drawingHeight / 2f
+    var offsetX = drawingWidth.toFloat()
+
+    drawingAmplitudes
+        .let {
+            if(isReplaying){
+                it.takeLast(replayingPosition)//뒤에서부터 값을 가져옴
+            }else{
+                it
+            }
+        }
+        .forEach {
+        val lineLength = it / MAX_AMPLITUDE * drawingHeight * 0.8F
+
+        offsetX -= LINE_SPACE
+        if (offsetX < 0) return@forEach
+
+        //라인을 그리는 부분
+        canvas.drawLine(
+            offsetX,
+            centerY - lineLength / 2F,
+            offsetX,
+            centerY + lineLength / 2F,
+            amplitudePaint //위에서 선언했던 Paint객체를 상속받은 변수
+        )
+    }
+}
+```
+
+별도의 쓰레드를 통해서 recorder의 값을 Main쓰레드부터 받아 list에 추가
+
+##### SoundVisualizerView
+
+```java
+var onRequestCurrentAmplitude: (() -> Int)? = null
+
+//별도 쓰레드로 계속 가져옴
+private val visualizeRepeatAction: Runnable = object : Runnable {
+    override fun run() {
+        if(!isReplaying){
+            //onRequestCurrentAmplitude을 통해서 mainActivity에서 받은 레코드 값을 받아온다.
+            val currentAmplitude = onRequestCurrentAmplitude?.invoke() ?: 0
+            //Amplitude, Draw
+            drawingAmplitudes = listOf(currentAmplitude) + drawingAmplitudes
+        }else{
+            replayingPosition++
+        }
+
+        invalidate() //새로운 데이터를 받았을때 다시 draw해주게끔 해준다.
+
+        handler?.postDelayed(this, ACTION_INTERVAL) //쓰레드 인터벌 시간 설정
+    }
+}
+```
+
+##### MainActivity
+
+```java
+private val soundVisualizerView: SoundVisualizerView by lazy {
+    findViewById(R.id.soundVisualizerView)
+}
+
+private fun bindViews() {
+    soundVisualizerView.onRequestCurrentAmplitude = {
+        //위 함수를 실행하고 현재 recorder의 maxAmplitude값을 return
+        recorder?.maxAmplitude?:0
+    }
+...
+```
+
 ---
 
 # Back
@@ -219,3 +321,5 @@ private fun stopPlaying() {
 ```
 
 `setDataSource()` 재생할 파일의 위치를 파라미터로 설정하여 소스 설정. `prepare()`를 통해 준비시켜놓고 `start()`해준다.
+
+[전체 코드 보러 가기](https://github.com/byunginK/Andriod_Project/tree/main/chapter07)
