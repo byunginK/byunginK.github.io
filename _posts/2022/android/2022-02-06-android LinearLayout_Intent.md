@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "android basic 1"
+title: "android LinearLayout_Intent"
 date: 2022-02-06
 categories: [Kotlin]
 ---

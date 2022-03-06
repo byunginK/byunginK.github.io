@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "android basic 5"
+title: "android activity lifecycle_SAF"
 date: 2022-02-13
 categories: [Kotlin]
 ---

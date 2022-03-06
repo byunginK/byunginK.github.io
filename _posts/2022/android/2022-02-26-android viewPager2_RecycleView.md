@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "android basic 10"
+title: "android viewPager2_RecyclerView"
 date: 2022-02-26
 categories: [Kotlin]
 ---

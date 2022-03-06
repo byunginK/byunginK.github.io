@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "android basic 2"
+title: "android constraintlayout"
 date: 2022-02-07
 categories: [Kotlin]
 ---

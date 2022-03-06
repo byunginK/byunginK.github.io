@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "android basic 6"
+title: "android seek Bar_sound Pool"
 date: 2022-02-16
 categories: [Kotlin]
 ---

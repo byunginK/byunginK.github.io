@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "android basic 9"
+title: "android push alarm"
 date: 2022-02-22
 categories: [Kotlin]
 ---

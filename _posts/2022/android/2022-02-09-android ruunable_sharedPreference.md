@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "android basic 3"
+title: "android ruunable_sharedPreference"
 date: 2022-02-09
 categories: [Kotlin]
 ---

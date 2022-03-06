@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "android basic 4"
+title: "android scroll view_runOnUiThread"
 date: 2022-02-11
 categories: [Kotlin]
 ---

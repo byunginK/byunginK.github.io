@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "android basic 12"
+title: "android retrofit_glide"
 date: 2022-02-28
 categories: [Kotlin]
 ---

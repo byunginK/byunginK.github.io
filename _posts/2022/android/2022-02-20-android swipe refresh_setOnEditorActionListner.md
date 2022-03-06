@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "android basic 8"
+title: "android swipe refresh_setOnEditorActionListner"
 date: 2022-02-20
 categories: [Kotlin]
 ---

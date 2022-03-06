@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "android basic 11"
+title: "android pedingIntent"
 date: 2022-02-27
 categories: [Kotlin]
 ---

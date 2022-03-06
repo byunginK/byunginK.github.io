@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "android basic 7"
+title: "android custom draw_mediaPlay"
 date: 2022-02-17
 categories: [Kotlin]
 ---
