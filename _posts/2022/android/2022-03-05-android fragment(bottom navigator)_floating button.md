@@ -56,10 +56,8 @@ Fragment는 앱 UI의 재사용 가능한 부분을 나타냅니다. 프래그�
 
 ※ 모듈성
 
->
-
-    프래그먼트는 UI를 개별 청크로 분할할 수 있도록 하여 활동의 UI에 모듈성과 재사용성을 도입합니다.
-    작은 화면에서는 앱이 하단 탐색 메뉴와 선형 레이아웃 목록을 표시해야 합니다. Activity에서 이러한 모든 변형을 관리하는 작업은 어려울 수 있습니다. 콘텐츠에서 탐색 요소를 분리하면 이 프로세스를 더 쉽게 관리할 수 있습니다. 그러면 Activity은 올바른 탐색 UI를 표시하고 프래그먼트는 적절한 레이아웃으로 목록을 표시할 수 있다.
+프래그먼트는 UI를 개별 청크로 분할할 수 있도록 하여 활동의 UI에 모듈성과 재사용성을 도입합니다.
+작은 화면에서는 앱이 하단 탐색 메뉴와 선형 레이아웃 목록을 표시해야 합니다. Activity에서 이러한 모든 변형을 관리하는 작업은 어려울 수 있습니다. 콘텐츠에서 탐색 요소를 분리하면 이 프로세스를 더 쉽게 관리할 수 있습니다. 그러면 Activity은 올바른 탐색 UI를 표시하고 프래그먼트는 적절한 레이아웃으로 목록을 표시할 수 있다.
 
 ※ lifecycle
 ![image](https://user-images.githubusercontent.com/65350890/156917075-e251f962-86ad-4822-a3d1-5e9689cbb021.png)
@@ -178,4 +176,4 @@ fragmentHomeBinding.addFloatingButton.setOnClickListener {
 }
 ```
 
-[전체 코드 보러 가기](https://github.com/byunginK/Andriod_Project/tree/main/chapter12)
+[전체 코드 보러 가기](https://github.com/byunginK/Andriod_Project/tree/main/chapter14)
