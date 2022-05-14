@@ -18,6 +18,7 @@ categories: [JPA]
 
 - N:1방향으로 설정을 하며, **@JoinColumn** 어노테이션을 통해 객체로 연관관계 매핑 가능
 - `JoinColumn`을 넣어줘야한다. 그렇지 않으면 `JoinTable`이 디폴트로 설정되어 운영이 어려워 질 수 있다.
+- 연관관계의 주인이 되어야 한다.
 
 ### @OneToMany
 
@@ -109,3 +110,135 @@ public class Team {
 
 - 관계형 DB는 정규화된 테이블 2개로 표현 불가능
 - 일대다, 다대일로 풀어야한다.
+- 중간 테이블이 생성 (매핑) 단, 매핑 테이블에 다른 정보 추가 불가
+
+### 해결법
+
+- @OneToMany 와 @ManyToOne으로 풀어야한다.
+- 중간 테이블을 엔티티로 승격한다.
+
+### 상속관계 매핑
+
+- DB 슈퍼타입 서브타입 관계의 모델링 기법이 객체의 상속과 유사
+
+#### 1. DB입장에서 상속의 관계를 3가지 방법으로 구성가능
+
+- 조인전략 (공통 테이블에 상속을 받을 테이블의 구분 컬럼을 추가)(가장 정규화된 방법)
+- 각각 테이블 전략
+- 단일 테이블 전략 (컬럼으로 전부 넣어놓고 타입 컬럼으로 구분)(성능상 선택)(상속시 JPA 기본 적략)
+
+#### 2. 주요 어노테이션
+
+- `@Inheritance(strategy = InheritanceType.JOINED)`으로 설정 시 조인전략으로 테이블 구성
+
+```java
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Item {
+
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    private String name;
+    private int price;
+
+}
+
+@Entity
+public class Movie extends Item{
+
+    private String director;
+    private String actor;
+}
+
+@Entity
+public class Album  extends Item{
+
+    private String artist;
+}
+
+...
+```
+
+```sql
+    create table Item (
+       id bigint not null,
+        name varchar(255),
+        price integer not null,
+        primary key (id)
+    )
+
+        create table Album (
+       artist varchar(255),
+        id bigint not null,
+        primary key (id)
+    )
+
+        create table Movie (
+       actor varchar(255),
+        director varchar(255),
+        id bigint not null,
+        primary key (id)
+    )
+```
+
+- `@DiscriminatorColumn` default가 조인이된 엔티티 명이 들어가게 된다. (DTYPE 이 생성되게됨) `@DiscriminatorValue("A")`를 자식 엔티티에 붙이면 설정된 값("A")이 Item 테이블에 DTYPE으로 들어간다.
+
+```java
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn
+public abstract class Item {
+
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    private String name;
+    private int price;
+
+}
+
+@Entity
+@DiscriminatorValue("A")
+public class Album  extends Item{
+
+    private String artist;
+}
+```
+
+- `@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)`으로 했을때 문제는 부모 클래스로 자식 클래스를 조회 했을때 union all로 전부 검색
+
+### @MappedSuperclass
+
+- 공통 매핑 정보가 필요할때 사용 (id, name, 등 )
+- 아래 예제는 날짜등의 공통 속성을 상속 받도록 진행
+- 직접 사용하지 않기 때문에 추상 클래스로 사용 권장
+
+```java
+@MappedSuperclass
+public abstract class BaseEntity {
+
+    private String createBy;
+    private LocalDateTime createdDate;
+    private String lastModifiedBy;
+    private LocalDateTime lastModifiedDate;
+}
+
+
+@Entity
+public class Member extends BaseEntity{
+
+    public Member() {
+    }
+
+    @Id
+    private Long id;
+
+    @Column(name = "name")
+    private String username;
+
+    private Integer age;
+...
+```
