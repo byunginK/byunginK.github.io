@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "JPA 영속성 전이"
+title: "JPA 영속성 전이(Cascade)"
 date: 2022-05-15
 categories: [JPA]
 ---
