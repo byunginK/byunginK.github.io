@@ -41,7 +41,9 @@ fetch join으로 성능 최적화를 하지 않으면 컬렉션에 담기는 모
         format_sql: true
         default_batch_fetch_size: 1000 #최적화 옵션
 ```
+
 - order에서 ToOne은 지연로딩으로 가져오고 item을 가져올 때 인해 발생하던 여러 쿼리 호출이 한번에 가져온다
+
 ```java
     /**
      * V3.1 엔티티를 조회해서 DTO로 변환 페이징 고려
@@ -61,7 +63,8 @@ fetch join으로 성능 최적화를 하지 않으면 컬렉션에 담기는 모
     }
 
 
----
+```
+```java
 @Repository
 public class OrderRepository {
 	private final EntityManager em;
@@ -77,6 +80,7 @@ public class OrderRepository {
     }
 }
 ```
+
 - DTO 예시 (order를 불러오고 [지연로딩으로 
 
 ```java
