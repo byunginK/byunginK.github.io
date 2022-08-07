@@ -212,7 +212,7 @@ public class Album  extends Item{
 
 ### @MappedSuperclass
 
-- 공통 매핑 정보가 필요할때 사용 (id, name, 등 )
+- 공통 매핑 정보가 필요할때 사용 (id, name, 등록일, 수정일 등 )
 - 아래 예제는 날짜등의 공통 속성을 상속 받도록 진행
 - 직접 사용하지 않기 때문에 추상 클래스로 사용 권장
 
