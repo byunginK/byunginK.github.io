@@ -71,3 +71,137 @@ Optional<Member> findOptionalByUsername(String username); //단건
 - 만약 단건(객체)일 경우에는 null로 반환한다.
 - java 8 이후로 부터는 Optional을 사용하여 null 반환에 대해 방지 할 수 있다.
 - 단, 단건 조회 쿼리에서 결과가 다수가 나왔을 경우 예외가 발생
+
+## 페이징
+
+1. 기존 JPQL에서 사용하던 방식
+
+```java
+public List<Member> findByPage(int age, int offset, int limit){
+	return em.createQuery("select m from Member m where m.age = :age order by m.username desc")
+			.setParameter("age",age)
+			.setMaxResults(limit)
+			.setFirstResult(offset)
+			.getResultList();
+}
+```
+
+2. spring data jpa의 페이징 및 정렬
+
+```java
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+Page<Member> findByAge(int age, Pageable pageable);
+```
+
+spring data에서 지원하는 기능을 사용
+
+```java
+int age = 10;
+//0페이지부터, 3개를 username으로 정렬해서 PageRequest로 반환
+PageRequest pageRequest = PageRequest.of(0, 3, Sort.by(Sort.Direction.DESC, "username"));
+
+//자동으로 totalcount까지 진행 후 페이징
+Page<Member> page = memberRepository.findByAge(age, pageRequest );
+
+List<Member> content = page.getContent(); //페이징 후 결과 값 list로 반환
+long totalElements = page.getTotalElements(); //총 갯수
+```
+
+`Slice<Member>`는 아래와 같이 interface로 설정 후 실행한다.
+
+```java
+Slice<Member> findByAge(int age, Pageable pageable);
+```
+
+전체 카운트 쿼리가 나가지 않는다. (보통 모바일 "더보기"기능으로 할때 유용)
+
+- 쿼리가 복잡해지면 (left join 등) 카운트 쿼리가 성능적으로 영향을 미칠 때 별도의 쿼리로 실행이 되게끔 할 수 있다.
+
+```java
+@Query(value = "select m from Member m",
+		countQuery = "select count (m) from Member m")
+Page<Member> findByAge(int age, Pageable pageable);
+```
+
+- 외부로 결과값을 리턴할 때 DTO로 변환 할때는 `page.map`을 활용하여 반환
+
+```java
+Page<MemberDto> memberDtos = page.map(member -> new MemberDto(member.getId(), member.getUsername(), null));
+
+List<MemberDto> content = memberDtos.getContent();
+```
+
+## Bluk Update
+
+한번에 많은 데이터를 수정하기 위해 `@Modifying`어노테이션을 사용하여 업데이트
+(update 쿼리는 `@Modifying`어노테이션 붙여줘야한다.)
+
+```java
+@Modifying
+@Query("update Member m set m.age = m.age + 1 where m.age >= :age")
+int bulkAgePlus(@Param("age") int age);
+```
+
+**_(주의)업데이트를 벌크로 했을경우 jpa 영속성에는 아직 반영이 안되고 DB에만 값이 수정 된다._**
+
+따라서 벌크 연산을 진행하고나서는 모든 영속성의 값을 clear 해줘야한다.
+
+```java
+@PersistenceContext
+private EntityManager em;
+
+em.flush();
+em.clear();
+```
+
+위와 같이 날려주고 다시 조회를 해야한다.
+(JPQL을 사용하게되면 쿼리를 날리고 flush를 안하고 clear만 하면된다.)
+
+- spring data jpa에서는 아래와 같이 어노테이션을 지원하여 별도의 `EntityManager`로 clear해줄 필요가 없다.
+
+```java
+@Modifying(clearAutomatically = true)
+```
+
+## EntityGraph
+
+join의 Lazy 호출의 문제인 N + 1를 발생할때 fetch join을 사용.
+fetch join을 spring data에서는 아래와 같이 사용
+
+1. 아래 코드는 기존 JPQL의 fetch join 방식
+
+```java
+@Query("select m from Member m left join fetch m.team")
+List<Member> findMemberFetchJoin();
+```
+
+2. spring data에서 제공하는 fetch join 어노테이션
+
+```java
+//@Query("select m from Member m left join fetch m.team")
+@EntityGraph(attributePaths = {"team"})
+List<Member> findMemberFetchJoin();
+```
+
+## JPA Hint & Lock
+
+1. JPA Hint
+   SQL 힌트가 아니라 JPA 구현체에게 제공하는 힌트
+
+```java
+@QueryHints(value = @QueryHint(name = "org.hibernate.readOnly",value = "true"))
+Member findReadOnlyByUsername(String username);
+```
+
+위와 같이하면 성능최적화를 통해 스냅샷을 생성하지않고 변경감지 체크를 하지 않는다.
+
+2. Lock
+
+DB 사용시 다른 어플리케이션에서 접근에 대해 Lock을 걸 수 있다.
+
+```java
+@Lock(LockModeType.PESSIMISTIC_WRITE)
+List<Member> findLockByUsername(String username);
+```
