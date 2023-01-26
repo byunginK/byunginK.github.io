@@ -198,3 +198,65 @@ spec:
 
 yaml파일로 rolling update 하는 방법이다. <br/>
 위의 annotations 부분의 버전을 올리고, 아래 spec의 image에서 버전을 올리고 `kubectl apply -f <yaml 파일명>` 실행
+
+# Daemon Set
+
+전체 노드에서 Pod가 한개씩 실행되도록 보장. 로그 수집기, 모니터링 에이전트 같은 프로그램 실행 시 적용<br/>
+
+##### yaml 예시
+
+```yaml
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: daemonSet-nginx
+spec:
+  selector:
+    matchLables:
+      app: webui
+  template:
+    metadata:
+      name: nginx-pod
+      labels:
+        app: webui
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx:1.14
+```
+
+edit명령어를 통해서 rolling update가 가능하며, `kubectl rollout undo daemonset daemonSet-nginx` 명령어를 통해서 roll back도 가능하다.
+
+# Stateful sets
+
+pod의 상태를 유지해주는 컨트롤러 (pod의 이름, pod의 볼륨)
+기본적인 컨트롤러로 pod를 생성하면 pod는 랜덤한 hash값으로 이름을 생성한다. 그러나 stateful set을 사용하면 pod의 이름을 보장한다.
+
+##### yaml 예제
+
+```yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: sf-nginx
+spec:
+  replicas: 3
+  serviceName: sf-nginx-service ----- stateful set에서 설정하는 새로운 필드
+  #podManagementPolicy: OrderedReady  ------ 이름 순차적으로 pod 생성 (default 값)
+  podManagementPolicy: Parallel       ------ 동시에 여러개가 생성
+  selector:
+    matchLables:
+      app: webui
+  template:
+    metadata:
+      name: nginx-pod
+      labels:
+        app: webui
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx:1.14
+```
+
+`kubectl scale statefulset sf-nginx --replicas=4`로 replicas의 개수를 통해 스케일 아웃/다운 할 수 있다.
+`kubectl edit statefulsets.apps sf-nginx`을 통해서 업데이트도 가능하다. 또한 rollout undo 명령어를 통해서 roll back도 가능하다.
