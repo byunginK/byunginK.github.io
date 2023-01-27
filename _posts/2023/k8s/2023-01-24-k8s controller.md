@@ -260,3 +260,89 @@ spec:
 
 `kubectl scale statefulset sf-nginx --replicas=4`로 replicas의 개수를 통해 스케일 아웃/다운 할 수 있다.
 `kubectl edit statefulsets.apps sf-nginx`을 통해서 업데이트도 가능하다. 또한 rollout undo 명령어를 통해서 roll back도 가능하다.
+
+# Job
+
+pod를 running 중인 상태로 유지 (배치 파일에 적합) batch 처리하는 pod는 작업이 완료되면 종료됨
+
+- 비정상 종료 시 다시 실행
+- 정상 종료 시 완료
+
+##### yaml 예시
+
+```yaml
+apiVersion: apps/v1
+kind: Job
+metadata:
+  name: job-example
+spec:
+  # competions: 5  ----- 실행해야 할 job의 수가 몇개인지 지정
+  # parallelism: 2 ----- 병렬성. 동시 running되는 pod 수
+  # activeDeadlineSeconds: 15 ------ 지정 시간 내에 job을 완료
+  template:
+    spec:
+      containers:
+        - name: centos-container          ---------- 보통 back up 컨테이너, 가비지 콜렉터 등 배치 작업 컨테이너
+          image: centos:7
+          command: ["bash"]
+          args:
+          - "-c"
+          - "echo 'hello world'; sleep 50; echo 'bye'"
+        restartPolicy: Never  ----------- never(pod를 restart), onfailure(container를 restart)를 사용
+  #backoffLimit: 3 ----------- default 는 6이며, 컨테이너 실행시 실패 시 재시작 횟수
+```
+
+작업 완료 후 pod가 삭제되지 않고 유지된다. 유지 이유는 완료 후 pod의 상태 및 작업 처리 로그 등 내용을 확인 할 수 있도록 해주기 위해서.
+
+# CronJob
+
+Job의 컨트롤러 기능이 포함되어있다. 사용자가 원하는 시간에 job실행 예약 지원 linux의 cronjob의 스케줄링 기능을 추가한것이다.
+
+##### 주요 사용 기능들
+
+- Data Backup
+- Send email
+- Clening tasks
+
+##### Cronjob Schedule: "0 3 1 \* \*"
+
+- Minutes (from 0 to 59)
+- Hours (from 0 to 23)
+- Day of the month (from 1 to 31)
+- Month (from 1 to 12)
+- Day of the week (from 0 to 6) (0이 일요일)
+
+\*는 모든 범위를 포함 한다는 의미
+
+##### 예시
+
+- 매월 1일 아침 9시 정각 job 실행 "0 9 1 \* \*"
+- 주중 새벽 3시 job 실행 "0 3 \* \* 1-5"
+- 주말에 새벽 3시 job 실행 "0 3 \* \* 0,6"
+- 5분마다 한번씩 실행 "\*/5 \* \* \*"<br/>
+  '/'는 스텝을 의미한다.
+
+##### yaml 예제
+
+```yaml
+apiVersion: batch/v1beta1       ------- version은 변경 될 수 있다.
+kind: CronJob
+metadata:
+  name: cronjob-example
+spec:
+  schedule: "0 3 1 * *"
+  startingDeadlineSeconds: 300
+  concurrencyPolicy: Forbid   ---- Allow가 default 한번에 여러개의 job이 running이 가능하다는 의미
+  jobTemplate:
+    spec:
+    tempate:
+      spec:
+        containers:
+          - name: hello
+            image: busybox
+            args:
+              - /bin/sh
+              - -c
+              - date; echo Hello
+        restartPolicy: Never
+```
