@@ -28,7 +28,7 @@ pre.highlight, pre {
     padding-left: 20px;
   }
   border: 1px solid rgba(128,128,128,0.1);
-  background-color: #1a1b21;
+  background-color: #282c34;
   border-radius: 2px;
   padding: 10px;
   display: block;
@@ -36,7 +36,7 @@ pre.highlight, pre {
 
   > code {
     width: 100%;
-    max-width: 50rem;
+    //max-width: 50rem;
     margin-left: auto;
     margin-right: auto;
     line-height: 1.5;
@@ -55,7 +55,7 @@ pre.highlight, pre {
 
 .highlight,
 .highlight .w {
-  color: #fbf1c7;
+  color: #abb2bf;
   // background-color: #1a1b21;
 }
 
@@ -70,7 +70,7 @@ pre.highlight, pre {
 .highlight .cm,
 .highlight .c1,
 .highlight .cs {
-  color: #928374;
+  color: #5c6370;
   font-style: italic;
 }
 
@@ -84,16 +84,16 @@ pre.highlight, pre {
 
 .highlight .o,
 .highlight .ow {
-  color: #fbf1c7;
+  color: #abb2bf;
 }
 
 .highlight .p,
 .highlight .pi {
-  color: #fbf1c7;
+  color: #abb2bf;
 }
 
 .highlight .gi {
-  color: #b8bb26;
+  color: #61afef;
   background-color: #282828;
 }
 
@@ -103,7 +103,7 @@ pre.highlight, pre {
 }
 
 .highlight .gh {
-  color: #b8bb26;
+  color: #61afef;
   font-weight: bold;
 }
 
@@ -135,17 +135,17 @@ pre.highlight, pre {
 .highlight .sh,
 .highlight .sx,
 .highlight .s1 {
-  color: #b8bb26;
+  color: #61afef;
   font-style: italic;
 }
 
 .highlight .si {
-  color: #b8bb26;
+  color: #61afef;
   font-style: italic;
 }
 
 .highlight .sr {
-  color: #b8bb26;
+  color: #61afef;
   font-style: italic;
 }
 
@@ -166,7 +166,7 @@ pre.highlight, pre {
 }
 
 .highlight .na {
-  color: #b8bb26;
+  color: #61afef;
 }
 
 .highlight .m,
