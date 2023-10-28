@@ -172,7 +172,7 @@ public class Product {
 
 이처럼 특정 필드에 대해 클래스에서만 사용되고, 테이블 컬럼으로 관리하고 싶지 않을 경우가 있습니다. 하지만 JPA는 @Entity 클래스에 포함된 모든 필드에 대해 영속 대상으로 간주하여 테이블의 컬럼과 자동으로 매핑 시키는 작업을 수행해주기 때문에, 다음과 같은 엔티티에 대한 로그를 살펴보실 수 있습니다.
 
-```SQL
+```sql
 Hibernate:
     create table product (
        id bigint not null,
