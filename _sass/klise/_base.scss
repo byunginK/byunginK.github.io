@@ -160,7 +160,7 @@ ol {
     counter-increment: li;
     &::before {
       content: counter(li);
-      display: inline-block;
+      display: none;
       width: 1em;
       margin-right: 0.5em;
       margin-left: -1.6em;
